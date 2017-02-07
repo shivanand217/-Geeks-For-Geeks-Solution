@@ -1,7 +1,7 @@
 // AUTHOR: SHIV ANAND
 // LANGUAGE: CPP
 // TIME COMPLEXITY: O(n+range)
-// SPACE COMPLEXITY: O(n+k)
+// SPACE COMPLEXITY: O(n+range)
 
 #include<bits/stdc++.h>
 #include<cstdio>
