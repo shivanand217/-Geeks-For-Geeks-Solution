@@ -1,74 +1,101 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int k;
-
 struct tree
 {
-    int data;
-    struct tree *left;
-    struct tree *right;
+    int key;
+    struct tree *left,*right;
 };
 
-struct tree *new_node(int data)
+struct tree *create(int key)
 {
- struct tree *tmp = (struct tree *)malloc(sizeof(struct tree));
- tmp->data=data;tmp->left=NULL;tmp->right=NULL;
- return tmp;
-}
-
-struct tree *insert_(struct tree *root,int data)
-{
-    if(root==NULL)
-    {
-        return new_node(data);
-    }
-    if(root->data > data)
-    {
-        root->left = insert_(root -> left,data);
-    }
-    else
-    {
-        root->right = insert_(root -> right,data);
-    }
+    struct tree *root = (struct tree *)malloc(sizeof(struct tree));
+    root->key = key;
+    root->left = NULL;
+    root->right = NULL;
     return root;
 }
 
-// for the second largest node we do a inorder traversal the node which comes second last is the second largest
-// here we are doing the reverse inorder traversal then the 2nd element will give the second largest element
-
-void second_largest(struct tree *root,int &c)
+struct tree *insert_(struct tree *root, int key)
 {
-    // base
-    if(root == NULL || c>=k)
-    {
-        return;
-    }
-    // follow reverse inorder
-    second_largest(root->right,c);
+    if(root == NULL)
+		return create(key);
+
+    if(key < root->key)
+		root->left = insert_(root->left, key);
+
+	else if(key > root->key)
+		root->right = insert_(root->right, key);
+
+	return root;
+}
+
+void traverse_inorder(struct tree *root)
+{
+    if(!root)
+		return;
+
+    traverse_inorder(root->left);
+    cout<<root->key<<" ";
+    traverse_inorder(root->right);
+}
+
+void solve(struct tree *root, int k, int &c)
+{
+	// avoiding unnecessary recursive calls
+    if(root == NULL || c >= k)
+		return;
+
+    solve(root->right, k, c);
     c++;
 
     if(c == k)
-    {
-        cout<<root->data<<endl;return;
-    }
-    second_largest(root->left,c);
+	{
+        cout<<root->key<<endl;
+	}
+
+    solve(root->left, k, c);
 }
 
 int main()
 {
-    struct tree *root= NULL;
-    root = insert_(root,20);
-    insert_(root,10);
-    insert_(root,30);
-    insert_(root,15);
-    insert_(root,19);
-    insert_(root,40);
-    insert_(root,32);
+    int t;
+    cin>>t;
 
-    int c=0;
-    cin>>k;
-    second_largest(root,c);
+    int n;
+    int key ,k;
 
-    return 0;
+    while(t--)
+	{
+        cin>>n;
+        cin>>key;
+        struct tree *root = NULL;
+        root = create(key);
+
+        if(n == 1)
+		{
+            cin>>k;
+            if(k > 1)
+			{
+				cout<<"-1"<<endl;
+			}
+			else
+			{
+				cout<<root->key<<endl;
+			}
+		}
+		else
+		{
+            for(int i=0; i<n-1; i++)
+			{
+                cin>>key;
+                root = insert_(root, key);
+			}
+
+            cin>>k;
+            int c = 0;
+            solve(root, k, c);
+		}
+	}
+	return 0;
 }
