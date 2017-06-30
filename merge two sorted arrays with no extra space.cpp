@@ -6,7 +6,7 @@
 /**
 
     awesome problem  merge two sorted arrays with no extra space
-    we are using the method of insertion sort for the insertion
+    i am using the method of insertion sort for the insertion
 
     **/
 
