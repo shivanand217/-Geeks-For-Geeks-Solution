@@ -5,7 +5,6 @@ using namespace std;
 // O(n) time
 
 int a[1002];
-
 int main()
 {
 	int n;
