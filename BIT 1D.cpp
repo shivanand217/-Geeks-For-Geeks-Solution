@@ -1,5 +1,3 @@
-// AUTHOR: SHIV ANAND
-// LANGUAGE: CPP
 
 /** 1d BIT: binary indexed tree gives us sum in range and update value effieciently with less memory usage in comparision with the segment tree **/
 /** we give one extra index to the BITree in comp to the initial array an every time the getsum(index) function is called
