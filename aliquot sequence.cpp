@@ -1,7 +1,5 @@
 // AUTHOR: SHIV ANAND
 // LANGUAGE: CPP
-// TIME COMPLEXITY : O()
-// SPACE COMPLEXITY : O()
 
 #include<bits/stdc++.h>
 #include<cstdio>
