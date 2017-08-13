@@ -1,5 +1,3 @@
-// AUTHOR: SHIV ANAND
-// LANGUAGE: CPP
 
 /** for a number to be divisible by 8 if and only if the last three digit of the number is divisible by 8 **/
 
