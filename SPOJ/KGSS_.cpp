@@ -26,7 +26,7 @@ char k;
 void build( int node, int s, int e ) {
 
     if(s == e) {
-		Tree[node] = make_pair(arr[s] , -1LL);
+	Tree[node] = make_pair(arr[s] , -1LL);
         return;
     }
 
@@ -38,7 +38,7 @@ void build( int node, int s, int e ) {
     build(left, s, mid);
     build(right, mid+1, e);
 
-	Tree[node] = make_pair(max(Tree[left].ff,Tree[right].ff), max(max(Tree[left].ss, Tree[right].ss), Tree[left].ff + Tree[right].ff));
+    Tree[node] = make_pair(max(Tree[left].ff,Tree[right].ff), max(max(Tree[left].ss, Tree[right].ss), Tree[left].ff + Tree[right].ff));
 }
 
 void update(int node, int s, int e, int index, ll value) {
@@ -55,15 +55,15 @@ void update(int node, int s, int e, int index, ll value) {
     if(index <= mid){
         update(left, s, mid, index, value);
     } else {
-		update(right, mid+1, e, index, value);
+	update(right, mid+1, e, index, value);
     }
 
-	Tree[node] = make_pair(max(Tree[left].ff,Tree[right].ff), max(max(Tree[left].ss, Tree[right].ss), Tree[left].ff + Tree[right].ff));
+    Tree[node] = make_pair(max(Tree[left].ff,Tree[right].ff), max(max(Tree[left].ss, Tree[right].ss), Tree[left].ff + Tree[right].ff));
 }
 
 pair<ll,ll> query(int node, int s, int e, int l, int r) {
     if(s == l && e == r) {
-		return Tree[node];
+	return Tree[node];
     }
 
     int mid = (s+e)/2;
@@ -75,7 +75,7 @@ pair<ll,ll> query(int node, int s, int e, int l, int r) {
     }
 
     if(l > mid){
-		return query(right, mid+1, e, l, r);
+	return query(right, mid+1, e, l, r);
     }
 
     pair<ll, ll> queryLeft , queryRight;
@@ -87,7 +87,6 @@ pair<ll,ll> query(int node, int s, int e, int l, int r) {
 }
 
 int main() {
-
     si(n);
     for(int i=0; i<n; i++){
         slli(arr[i]);
@@ -100,16 +99,13 @@ int main() {
         scanf("\n%c ",&k);
 
         if(k == 'U') {
-
-			si(in), slli(val);
-			--in;
+	    si(in), slli(val);
+	    --in;
             update(1, 0, n-1, in, val);
 
         } else {
-
             si(u), si(v);
             u--, v--;
-
             ans = query(1, 0, n-1, u, v);
             printf("%lld", ans.ss);
             nl;
