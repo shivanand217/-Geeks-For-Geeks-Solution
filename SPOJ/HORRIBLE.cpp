@@ -1,5 +1,7 @@
 /** k,c,u,f are my favourite variables **/
 
+/** author: shiv anand **/
+
 #include<bits/stdc++.h>
 #define ff first
 #define ss second
@@ -46,9 +48,9 @@ void updateRange(int node, int s, int e, int l, int r, ll val) {
 
         if(s != e) {
             lazy[2*node] += lazy[node];
-			      lazy[2*node+1] += lazy[node];
+	    lazy[2*node+1] += lazy[node];
         }
-		        lazy[node] = 0;
+	    lazy[node] = 0;
     }
 
     if(s > e || s > r || l > e)
@@ -61,7 +63,7 @@ void updateRange(int node, int s, int e, int l, int r, ll val) {
             lazy[2*node] += val;
             lazy[2*node+1] += val;
         }
-		    return;
+	    return;
     }
 
     int mid = ((s+e)/2);
@@ -75,16 +77,17 @@ void updateRange(int node, int s, int e, int l, int r, ll val) {
 ll queryRange(ll node, ll s, ll e, ll l, ll r) {
 
     if(s > e || s > r || e < l)
-		    return 0;
+	    return 0;
 
     if(lazy[node] != 0) {
-		    tree[node] += (e - s + 1)*lazy[node];
+	tree[node] += (e - s + 1)*lazy[node];
 
         if(s != e) {
             lazy[2*node] += lazy[node];
             lazy[2*node+1] += lazy[node];
         }
-			      lazy[node] = 0;
+	
+	lazy[node] = 0;
     }
 
     if(s >= l && e <= r) {
@@ -100,16 +103,16 @@ ll queryRange(ll node, ll s, ll e, ll l, ll r) {
 }
 
 int main() {
-
-	  ll n,l,r,Q,t,type,value;
+	
+    ll n,l,r,Q,t,type,value;
     slli(t);
 
     while(t--) {
 
     memset(tree, 0, sizeof(tree));
     memset(lazy, 0, sizeof(lazy));
-
-	  slli(n), slli(Q);
+    
+    slli(n), slli(Q);
 
     for(ll i=1; i<=n; i++) {
         arr[i]=0LL;
@@ -119,15 +122,15 @@ int main() {
 
     while(Q--) {
 
-		slli(type);
+	slli(type);
         slli(l), slli(r);
 
         if(type == 0) {
             slli(value);
-			      updateRange( 1, 1, n, l, r, value );
+	    updateRange( 1, 1, n, l, r, value );
 
         } else {
-        	  ll ans = queryRange( 1, 1, n, l, r );
+            ll ans = queryRange( 1, 1, n, l, r );
             printf("%lld\n", ans);
             
         }
