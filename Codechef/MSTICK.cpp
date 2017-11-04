@@ -40,7 +40,7 @@ void build(ll node, ll s, ll e){
     build(2*node+1,mid+1,e);
 
     tree[node].min_ = min(tree[2*node].min_,tree[2*node+1].min_);
-	tree[node].max_ = max(tree[2*node].max_,tree[2*node+1].max_);
+    tree[node].max_ = max(tree[2*node].max_,tree[2*node+1].max_);
 
 }
 
