@@ -1,4 +1,4 @@
-// approach: Segment Tree
+// Approach: Segment Tree
 
 #include<bits/stdc++.h>
 #define ff first
@@ -13,20 +13,18 @@
 #define pi(x) printf("%d",x)
 #define sp() putchar(' ')
 #define nl() putchar('\n')
-#define mx5 100005
-#define mx6 1000006
-#define mx4 5004
-#define rep(i,n) for(int i=0; i<n; i++)
+#define mx5 100010
+#define mx6 1000010
+#define MOD 1000000007
 using namespace std;
-typedef vector<int> vi;
-typedef vector<ll> vl;
-typedef vector<string> vs;
-typedef pair<int,int> ii;
-typedef vector<ii> vii;
-typedef set<int> si;
-typedef unordered_set<int> usi;
-typedef map<int,int> mi;
-typedef unordered_map<int,int> umi;
+
+// policy based data structure
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/detail/standard_policies.hpp>
+#define ordered_set tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>
+using namespace __gnu_pbds;
+
 
 const int MAX = 1e5+10;
 
