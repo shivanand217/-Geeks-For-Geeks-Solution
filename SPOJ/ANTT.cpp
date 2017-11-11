@@ -5,8 +5,6 @@
 #define ss second
 #define mp make_pair
 #define ll long long
-#define max3(a,b,c) max(a, max(b,c))
-#define max4(a,b,c,d) max(a, max(b, max(c,d)))
 #define pb push_back
 #define si(x) scanf("%d",&x)
 #define slli(x) scanf("%lld",&x)
@@ -62,9 +60,10 @@ bool onsegment(Point &pi, Point &pj, Point &pk) {
 	return (in(min(pi.x,pj.x),pk.x,max(pi.x,pj.x)) && in(min(pi.y,pj.y),pk.y,max(pi.y,pj.y)));
 }
 
-inline bool intersect(Point &p1, Point &p2, Point &p3, Point &p4) {
+bool intersect(Point &p1, Point &p2, Point &p3, Point &p4) {
 
 	int d1, d2, d3, d4;
+	
 	d1 = direction(p3, p4, p1);
 	d2 = direction(p3, p4, p2);
 	d3 = direction(p1, p2, p3);
@@ -82,7 +81,6 @@ inline bool intersect(Point &p1, Point &p2, Point &p3, Point &p4) {
 }
 
 int main() {
-
 	int t, m, n, i, j, u, v;
 	scanf("%d", &t);
 
@@ -107,8 +105,10 @@ int main() {
 			scanf("%d%d", &i, &j);
 			u = find_root(i);
 			v = find_root(j);
-			if(u==v) printf("YES\n");
-			else printf("NO\n");
+			if(u==v) 
+				printf("YES\n");
+			else 
+				printf("NO\n");
 		}
 	}
 
