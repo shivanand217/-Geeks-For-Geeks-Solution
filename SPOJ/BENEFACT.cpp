@@ -1,3 +1,5 @@
+/** approach : bfs + bfs **/
+
 #include<bits/stdc++.h>
 #define ff first
 #define ss second
@@ -68,22 +70,21 @@ int main() {
    si(t);
 
    while(t--) {
-
-		ans = 0LL;
-		si(n);
+	ans = 0LL;
+	si(n);
+	   
         for(int i=1;i<=n;i++){
             graph[i].clear();
         }
 
-		for(int i=0; i < n-1; i++) {
-			si(x), si(y), slli(weight);
+	for(int i=0; i < n-1; i++) {
+	    si(x), si(y), slli(weight);
             graph[x].pb(make_pair(y,weight));
             graph[y].pb(make_pair(x,weight));
-		}
+	}
 
         bfs(bfs(1));
         printf("%lld\n",ans);
-
    }
 
    return 0;
