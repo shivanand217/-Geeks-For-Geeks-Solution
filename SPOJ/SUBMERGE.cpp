@@ -1,4 +1,4 @@
-/** articulation point **/
+/** approach : articulation point **/
 
 #include<bits/stdc++.h>
 #define ff first
