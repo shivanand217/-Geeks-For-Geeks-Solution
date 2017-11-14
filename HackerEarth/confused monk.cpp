@@ -25,6 +25,8 @@ using namespace __gnu_pbds;
 int a[102];
 
 /**
+recursive modular pow 0.30s slower than iterative one
+
 int power(int x,int y,int m) {
     if(y==0) {
 	return 1;
@@ -43,12 +45,12 @@ int power(int base,int exp,int m){
     int res=1;
     while(exp>0){
     	if((exp&1)){
-	   res=((ll)res*base)%mod;
+		res=((ll)res*base)%mod;
 	}
-	exp/=2;
-	base=((ll)base*base)%mod;
+		exp/=2;
+		base=((ll)base*base)%mod;
     }
-    return base;
+    return res;
 }
 
 int gcd(int a,int b) {
@@ -64,8 +66,8 @@ int main() {
     int g;
     int prod=1;
     for(int i=0;i<n;i++) {
-	si(a[i]);
-        prod=((ll)prod*a[i]))%mod;
+	    si(a[i]);
+        prod=((ll)prod*a[i])%mod;
         if(i==0){
             g=a[i];
         } else {
