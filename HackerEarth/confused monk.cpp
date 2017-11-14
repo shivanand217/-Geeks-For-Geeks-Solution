@@ -23,22 +23,37 @@ using namespace std;
 using namespace __gnu_pbds;
 
 int a[102];
-ll power(ll x,int y,int m) {
+
+/**
+int power(int x,int y,int m) {
     if(y==0) {
-		return 1;
+	return 1;
     }
-    ll p = power(x, y/2, m);
-    p = (p*p)%m;
+    int p = power(x, y/2, m);
+    p = ((ll)p*p)%m;
     if(y%2 == 0) {
         return p;
     } else {
-        return (x*p)%m;
+        return ((ll)x*p)%m;
     }
+}
+**/
+
+int power(int base,int exp,int m){
+    int res=1;
+    while(exp>0){
+    	if((exp&1)){
+	   res=((ll)res*base)%mod;
+	}
+	exp/=2;
+	base=((ll)base*base)%mod;
+    }
+    return base;
 }
 
 int gcd(int a,int b) {
     if(a==0) {
-		return b;
+	return b;
     }
     return gcd(b%a,a);
 }
@@ -47,19 +62,18 @@ int main() {
     int n;
     si(n);
     int g;
-    ll prod=1LL;
+    int prod=1;
     for(int i=0;i<n;i++) {
-		si(a[i]);
-        prod=(prod*(ll)a[i]);
-        prod%=mod;
+	si(a[i]);
+        prod=((ll)prod*a[i]))%mod;
         if(i==0){
             g=a[i];
         } else {
             g=gcd(g,a[i]);
         }
     }
-    ll ans = power(prod,g,mod);
-    printf("%lld\n",ans);
+    int ans = power(prod,g,mod);
+    printf("%d\n",ans);
     return 0;
 }
 
