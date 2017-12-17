@@ -57,7 +57,6 @@ int query(int L,int R) {
 }
 
 int main() {
-
     int n;
     si(n);
     for(int i=0;i<n;i++){
@@ -73,6 +72,7 @@ int main() {
         ans = query(l,r);
         printf("%lld\n",ans);
     }
+
     return 0;
 }
 
