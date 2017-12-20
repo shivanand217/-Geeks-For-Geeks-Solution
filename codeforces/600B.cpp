@@ -13,35 +13,26 @@
 #define gc() getchar()
 #define pc(x) putchar(x)
 using namespace std;
-int a[100005];
 int main() {
     fast;
-    int n,k;
-    cin>>n>>k;
-    int mx=0;
+    int n,m,tmp;
+    cin>>n>>m;
+    vector<int> a(n);
+    vector<int> b(m);
     for(int i=0;i<n;i++){
-        cin>>a[i];
-        mx=max(a[i],mx);
+        cin>>tmp;
+        a[i]=tmp;
     }
-    if(k >= n){
-        cout<<mx<<endl;
-        return 0;
+    sort(a.begin(),a.end());
+    for(int j=0; j < m;j++) {
+        cin>>tmp;
+        b[j]=tmp;
     }
-    int f=2*k-n;
-    int j=n-1;
-    int cnt=0;
+    vector<int> :: iterator up;
+    for(int j=0; j<m; j++){
+        up = upper_bound(a.begin(),a.end(),b[j]);
+        cout<<up-a.begin()<<" ";
+    }   cout<<endl;
 
-    while(cnt < f) {
-        j--;
-        cnt++;
-    }
-    int i=0;
-    int s;
-    while(i < j) {
-        s = a[i]+a[j];
-        mx=max(mx,s);
-        i++ , j--;
-    }
-        cout<<mx<<endl;
     return 0;
 }
