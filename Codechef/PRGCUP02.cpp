@@ -13,30 +13,45 @@
 #define gc() getchar()
 #define pc(x) putchar(x)
 using namespace std;
-
-int gcd(int a,int b){
-    if(a==0) {
+int gcd(int a,int b) {
+    if(a==0){
         return b;
     }
-    return gcd(b%a,a);
+    return gcd(b%a, a);
 }
-
 int main() {
     fast;
-    int t,x,y,z;
+    int t,a[3],x,y,z;
     cin>>t;
-
     while(t--) {
-        cin>>x>>y>>z;
-        int g1 = gcd(x,y);
-        int g2 = gcd(y,z);
-        int g3 = gcd(x,z);
-        if(g1 == 1 && g2 == 1 && g3 == 1) {
+        cin>>a[0]>>a[1]>>a[2];
+        sort(a,a+3);
+        x=a[0];
+        y=a[1];
+        z=a[2];
+        bool ans=false;
+        if(x+y > z && y+z > x && x+z > y){
+            ans=true;
+        }
+        if(ans==false){
+            cout<<"NO"<<endl;
+            continue;
+        }
+        int cop;
+        cop = gcd(x,gcd(y,z));
+        ans=true;
+        if(z*z != y*y + x*x) {
+            ans = false;
+        }
+        if(ans == false){
+            cout<<"NO"<<endl;
+            continue;
+        }
+        if(cop==1){
             cout<<"YES"<<endl;
         } else {
             cout<<"NO"<<endl;
         }
     }
-
     return 0;
 }
