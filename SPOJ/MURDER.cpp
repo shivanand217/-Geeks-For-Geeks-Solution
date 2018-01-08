@@ -1,13 +1,13 @@
-/** Using BIT **/
-
 #include<bits/stdc++.h>
 using namespace std;
 
 long long BIT[100005];
+
 int mxx = 100001;
 
 long long sum(int index) {
     long long s = 0LL;
+
     while(index > 0) {
          s += BIT[index];
          index = index - (index & (-index));
@@ -54,6 +54,7 @@ int main() {
 
 		for(int i=0; i < n; i++) {
 			ans += sum(temp[i]);
+
 			/** we have to send update to bit by increasing index by one but in original array it
                 will be at same position temp[i] **/
 
@@ -65,4 +66,3 @@ int main() {
 
 	return 0;
 }
-
