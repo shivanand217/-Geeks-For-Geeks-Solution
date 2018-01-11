@@ -1,142 +1,93 @@
-/** k,c,u,f are my favourite variables **/
-
-/** author: shiv anand **/
-
 #include<bits/stdc++.h>
-#define ff first
-#define ss second
-#define mp make_pair
-#define ll long long
-#define max3(a,b,c) max(a, max(b,c))
-#define max4(a,b,c,d) max(a, max(b, max(c,d)))
-#define pb push_back
-#define si(x) scanf("%d",&x)
-#define slli(x) scanf("%lld",&x)
-#define pi(x) printf("%d",x)
-#define sp() putchar(' ')
-#define nl() putchar('\n')
-#define mx5 100005
-#define mx6 1000010
-#define MOD 1000000007
 using namespace std;
+const int mx = 100005;
+#define ll long long
 
-ll arr[mx5];
-ll tree[4*mx5+10];
-ll lazy[4*mx5+10];
+ll segtree[ 4* mx ];
+ll lazy[ 4 * mx ];
 
-/** lazy propagation for range sum problem **/
+/** no need of array just lazy update and lazy query on segtree **/
 
-void build(ll node, ll s, ll e) {
-
-    if(s == e) {
-        tree[node] = arr[s];
-        return;
-    }
-
-    ll mid = ((s+e)/2);
-
-    build( 2*node , s, mid );
-    build( 2*node+1, mid+1, e );
-
-    tree[node] = tree[2*node] + tree[2*node+1];
-}
-
-void updateRange(int node, int s, int e, int l, int r, ll val) {
+void update(int node, int s, int e, int p, int q,ll v) {
+    /** reflects pending update needed **/
 
     if(lazy[node] != 0) {
-        tree[node] += (e - s + 1)*lazy[node];
-
-        if(s != e) {
-            lazy[2*node] += lazy[node];
-	    lazy[2*node+1] += lazy[node];
-        }
-	    lazy[node] = 0;
-    }
-
-    if(s > e || s > r || l > e)
-		    return;
-
-    if(s >= l && e <= r) {
-        tree[node] += (e - s + 1)*val;
-
-        if(s != e) {
-            lazy[2*node] += val;
-            lazy[2*node+1] += val;
-        }
-	    return;
-    }
-
-    int mid = ((s+e)/2);
-
-    updateRange( 2*node , s, mid, l, r, val );
-    updateRange( 2*node+1 ,mid+1, e, l, r, val );
-
-    tree[node] = tree[2*node] + tree[2*node+1];
-}
-
-ll queryRange(ll node, ll s, ll e, ll l, ll r) {
-
-    if(s > e || s > r || e < l)
-	    return 0;
-
-    if(lazy[node] != 0) {
-	tree[node] += (e - s + 1)*lazy[node];
-
+        segtree[node] += (e-s+1)*lazy[node];
         if(s != e) {
             lazy[2*node] += lazy[node];
             lazy[2*node+1] += lazy[node];
         }
-	
-	lazy[node] = 0;
+        lazy[node] = 0;
     }
 
-    if(s >= l && e <= r) {
-        return tree[node];
+    /** lies outside **/
+    if( e < s || p > e || q < s )
+        return;
+
+    /** current segment completly lie in range **/
+    if( p <= s && e <= q ) {
+        segtree[node] += (e-s+1)*v;
+        if(s != e) {
+            lazy[2*node] += v;
+            lazy[2*node+1] += v;
+        }
+        /** must return from here **/
+        return;
     }
 
-    ll mid = ((s+e)/2);
+    int mid = (s + e)/2;
+    update(2*node, s, mid, p, q, v);
+    update(2*node+1, mid+1, e, p, q, v);
+    segtree[node] = segtree[2*node] + segtree[2*node+1];
+    return;
+}
 
-    ll p1 = queryRange( 2*node, s, mid, l, r );
-    ll p2 = queryRange( 2*node+1, mid+1, e, l, r );
-
-    return ( p1 + p2 );
+ll query( int node, int s, int e, int p, int q ) {
+    if(lazy[node] != 0) {
+        segtree[node] += (e-s+1)*lazy[node];
+        if(s != e) {
+            lazy[2*node] += lazy[node];
+            lazy[2*node+1] += lazy[node];
+        }
+        lazy[node]=0;
+    }
+    /** outside range **/
+    if(e < s || p > e || q < s)
+        return 0;
+    /** completly in range **/
+    if( p <= s && e <= q ) {
+        return segtree[node];
+    }
+    int mid = (s + e)/2;
+    ll left = query(2*node, s, mid, p, q);
+    ll right = query(2*node+1, mid+1, e, p, q);
+    return (left + right);
 }
 
 int main() {
-	
-    ll n,l,r,Q,t,type,value;
-    slli(t);
 
+    int t, n, m, type, p, q;
+    cin>>t;
+
+    ll v;
     while(t--) {
-
-    memset(tree, 0, sizeof(tree));
-    memset(lazy, 0, sizeof(lazy));
-    
-    slli(n), slli(Q);
-
-    for(ll i=1; i<=n; i++) {
-        arr[i]=0LL;
-    }
-
-    build(1, 1, n);
-
-    while(Q--) {
-
-	slli(type);
-        slli(l), slli(r);
-
-        if(type == 0) {
-            slli(value);
-	    updateRange( 1, 1, n, l, r, value );
-
-        } else {
-            ll ans = queryRange( 1, 1, n, l, r );
-            printf("%lld\n", ans);
-            
+        memset(segtree,0,sizeof(segtree));
+        memset(lazy,0,sizeof(lazy));
+        cin>>n>>m;
+        for(int i = 0; i < m; i++) {
+            cin>>type;
+            if( type == 0 ) {
+                cin>>p>>q>>v;
+                --p, --q;
+                update(1, 0, n-1, p, q, v);
+            } else {
+                cin>>p>>q;
+                --p,--q;
+                ll ans = query(1, 0, n-1, p, q);
+                cout<<ans<<endl;
+            }
         }
     }
 
-    }
-
-	return 0;
+    return 0;
 }
