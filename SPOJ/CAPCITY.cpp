@@ -1,120 +1,141 @@
-#include<bits/stdc++.h>
-#define ff first
-#define ss second
+#include <bits/stdc++.h>
+
 #define mp make_pair
 #define ll long long
-#define max3(a,b,c) max(a, max(b,c))
-#define max4(a,b,c,d) max(a, max(b, max(c,d)))
 #define pb push_back
+
+#define ss second
+#define ff first
 #define si(x) scanf("%d",&x)
 #define slli(x) scanf("%lld",&x)
 #define pi(x) printf("%d",x)
-#define sp() putchar(' ')
-#define nl() putchar('\n')
-#define mx5 100010
-#define mx6 1000010
-#define MOD 1000000007
+
+#define mx5 100005
+#define mx6 1000006
+#define mod 1000000007
+
+#define rep(i,n) for(int i=0; i<n; i++)
+#define fast std::ios::sync_with_stdio(false)
+#define gc() getchar()
+#define pc(x) putchar(x)
+
 using namespace std;
 
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-#include <ext/pb_ds/detail/standard_policies.hpp>
-#define ordered_set tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>
-using namespace __gnu_pbds;
+typedef pair<int,int> pii;
 
-stack<int> st;
-vector<int> graph[mxx];
-vector<int> rev_graph[mxx];
-bool vis[mxx];
+// special value of infinity to take for getting rid of overflows
+const int inf = 0x3f3f3f3f;
 
-void dfs1(int u) {
-    vis[u]=true;
-    for(int i=0;i<graph[u].size();i++) {
-        if(!vis[graph[u][i]]) {
-            dfs1(graph[u][i]);
+/******************* Problem Code *****************/
+
+vector<int> graph[100005];
+vector<int> rev[100005];
+bool vis[100005];
+int ans[100005],comp[100005];
+bool has[100005];
+int n,m;
+
+void dfs1( int u, stack<int>& st ) {
+    vis[u] = true;
+    for(int i=0; i < graph[u].size(); i++) {
+        int to = graph[u][i];
+        if(vis[to] == false){
+            dfs1(to, st);
         }
     }
-    st.push(graph[u][i]);
+    st.push(u);
 }
 
-void dfs2(int u,int k) {
-    vis[u]=true;
-    C[u]=k;
-    for(int i=0;i<rev_graph[u].size();i++){
-        if(!vis[rev_graph[u][i]]){
-            dfs2(rev_graph[u][i],k);
+void dfs2( int u, int co ) {
+    vis[u] = false;
+    comp[u] = co;
+    for(int i=0; i < rev[u].size(); i++){
+        int to = rev[u][i];
+        if(vis[to] == true) {
+            dfs2(to, co);
         }
     }
 }
+
+/** top_sort
+bool top_sort() {
+    memset(vis, false, sizeof(vis));
+    queue<int> q;
+    for(int i=1; i <= n; i++) {
+        if(indegree[i] == 0) {
+            q.push(i);
+        }
+    }
+    while( !q.empty() ) {
+        int to = q.front();
+        q.pop();
+        vis[to] = true;
+        for(int i=0; i < graph[to].size(); i++) {
+            int po=graph[to][i];
+            indegree[po]--;
+            if(indegree[po] == 0){
+                q.push(po);
+            }
+        }
+    }
+    for(int i=1; i<=n; i++) {
+        if(vis[i] == false) {
+        }
+    }
+} **/
 
 int main() {
-    si(n), si(m);
-    for(int i=1; i<=n; i++){
-        vis[i]=false;
-        graph[i].clear();
-        rev_graph[i].clear();
-        in[i]=0;
-    }
+    int a , b;
+    while(1) {
+        cin>>n;
+        if( n == 0 )
+            break;
+        cin>>m;
 
-    for(int i=1;i<=m;i++){
-        si(u), su(v);
-        graph[u].pb(v);
-        rev_graph[v].pb(u);
-    }
-
-    for(int i=1;i<=n;i++){
-        if(!vis[i]){
-            dfs1(i);
+        for(int i=1; i<=n; i++) {
+            graph[i].clear();
+            rev[i].clear();
+            vis[i]=false;
+            has[i]=false;
+            comp[i]=0;
         }
-    }
 
-    for(int i=1;i<=n;i++){
-        vis[i]=false;
-    }
-
-    int component=0;
-
-    while(!st.empty()) {
-        int k = st.top();
-        st.pop();
-        if(vis[k]==false) {
-            ++component;
-			dfs2(k,component);
+        for(int i=0; i < m; i++) {
+            cin>>a>>b;
+            graph[a].push_back(b);
+            rev[b].push_back(a);
         }
-    }
 
-    int _size=component;
-    for(int i=1;i<=n;i++) {
-        for(int j=0;j<graph[i].size();j++) {
-            if(C[i] != C[graph[i][j]]) {
-                in[C[graph[i][j]]] += 1;
+        stack<int> st;
+        for(int i=1; i <= n; i++) {
+            if(vis[i] == false) {
+                dfs1(i, st);
             }
         }
-    }
-
-    int cnt=0;
-    for(int i=0;i<_size;i++) {
-        if(in[i] == 0){
-            ++cnt;
-        }
-    }
-
-    if(cnt > 1){
-        printf("0\n");
-    } else {
-        cnt=0;
-        for(int i=1;i<=n;i++){
-            if(in[C[i]]==0) {
-                cnt++;
+        int co = 0;
+        while( !st.empty() ) {
+            int to = st.top();
+            st.pop();
+            if( vis[to] == true ) {
+                co++;
+                dfs2( to, co );
+                has[co] = true;
             }
         }
-		printf("%d\n", cnt);
-        for ( i = 1; i <= n; ++i ) {
-            if ( in[ C[ i ] ] == 0 ) {
-                printf("%d ", i);
+        for(int i=1; i <= n; i++ ){
+            for(int j=0; j < graph[i].size(); ++j) {
+                if(comp[i] != comp[graph[i][j]]) {
+                    has[ comp[i] ] = false;
+                }
             }
         }
-			putchar('\n');
+
+        for(int i = 1; i <= n; i++) {
+            if( has[ comp[i] ] == true ) {
+                cout<<i<<" ";
+            }
+        }
+        cout<<endl;
     }
 
     return 0;
