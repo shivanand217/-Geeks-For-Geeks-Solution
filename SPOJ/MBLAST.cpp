@@ -29,38 +29,36 @@ const int inf = 0x3f3f3f3f;
 
 /******************* Problem Code *****************/
 
+int dp[2005][2005];
+
+int len(char s1, char s2) {
+    return abs((int)s1 - (int)s2);
+}
+
 int main() {
+
     fast;
-    string s;
-    int p = 1000;
+    string s1,s2;
+    cin>>s1>>s2;
+    int k;
+    cin>>k;
 
-    while( cin>>s ) {
-        int min_ = INT_MAX;
-        int cnt1=0,cnt2=0,cnt3=0,cnt4=0;
-        for(int i = 0; i<s.length(); i+=2) {
-            if(islower(s[i])){
-                cnt1++;
-            }
-        }
-        for(int i=1; i<s.length(); i+=2){
-            if(isupper(s[i])){
-                cnt2++;
-            }
-        }
-        for(int i=0; i<s.length(); i+=2){
-            if(isupper(s[i])){
-                cnt3++;
-            }
-        }
-        for(int i=1; i<s.length(); i+=2){
-            if(islower(s[i])){
-                cnt4++;
-            }
-        }
-
-        int ans = min( (cnt1+cnt2), (cnt3+cnt4) );
-
-        cout<<ans<<endl;
+    for(int i=0; i<2005; i++) {
+        dp[i][0] = i*k;
+        dp[0][i] = i*k;
     }
+
+    int n , m;
+    n=s1.length();
+    m=s2.length();
+
+    for( int i=1; i <=n; i++ )  {
+        for(int j=1; j<=m; j++ ) {
+            dp[i][j]=min(dp[i-1][j-1]+len(s1[i-1],s2[j-1]),
+                         min(dp[i-1][j]+k, dp[i][j-1]+k));
+        }
+    }
+    cout<<dp[n][m]<<endl;
+
     return 0;
 }
