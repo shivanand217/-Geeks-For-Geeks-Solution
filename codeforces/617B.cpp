@@ -16,29 +16,27 @@
 #define pc(x) putchar(x)
 using namespace std;
 
+const int mxx = 10005;
 // special value of infinity to take for getting rid of overflows
 const int inf = 0x3f3f3f3f;
-long long dp[2005][2005];
-
-int n, m, i, j, k;
-ll ans;
 
 int main() {
-
-	scanf("%d%d", &n, &m);
-	for(i=1;i<=n;i++)
-		dp[i][1]=1;
-
-	for(j = 2; j <= m; j++)
-		for(i = 1; i <= n ; i++)
-			for(k = i; k <= n; k += i)
-				dp[k][j] = ( dp[k][j] + dp[i][j-1])%mod;
-    ans = 0LL;
-
-	for(i=1; i<=n; i++)
-		ans = (ans + dp[i][m])%mod;
-
-	printf("%lld\n",ans);
+    int n , tmp;
+    cin>>n;
+    long long ans = 0LL;
+    int last = -1;
+    for(int i=1; i <= n; i++) {
+        cin>>tmp;
+        if(tmp == 1) {
+            if(ans == 0) {
+                ans = 1;
+            } else {
+                ans = ans * (i - last);
+            }
+            last = i;
+        }
+    }
+    cout<<ans<<endl;
 
     return 0;
 }

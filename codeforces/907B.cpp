@@ -17,7 +17,6 @@ using namespace std;
 char g[15][15];
 
 int main() {
-
     fast;
     int x,y;
     int i=1;
