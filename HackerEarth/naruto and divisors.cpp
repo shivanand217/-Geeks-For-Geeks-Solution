@@ -30,7 +30,7 @@ const int inf = 0x3f3f3f3f;
 /******************* Problem Code *****************/
 long long get_div( long long n ) {
     long long i , p, sum = 0;
-    for( i=2; i * i < n; i++ ) {
+    for( i = 1; i * i <= n; i++ ) {
         if(n % i == 0) {
             p = (n/i);
             if(p == i) {
@@ -38,18 +38,14 @@ long long get_div( long long n ) {
                     sum += p;
                 }
             } else {
-                if(p % 2 == 1 && n % p == 0) {
+                if( p % 2 == 1 ) {
                     sum += p;
                 }
-                if(i % 2 == 1 && n % i == 0) {
+                if( i % 2 == 1 ) {
                     sum += i;
                 }
             }
         }
-    }
-    sum++;
-    if(n % 2 == 1) {
-        sum += n;
     }
     return sum;
 }
