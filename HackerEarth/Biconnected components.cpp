@@ -1,4 +1,3 @@
-/** Bugs I will not Let you fuck my dreams **/
 
 /**
     Biconnected graph is the graph which has no articulation point ans the graph is connected
