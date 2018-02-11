@@ -40,7 +40,7 @@ int main() {
     if(p == x) {
         cout<<"Yes"<<endl;
     } else if(p < x) {
-        int rem=x-p;
+        int rem = x-p;
         if(rem%2==0) {
             cout<<"Yes"<<endl;
         }else{
