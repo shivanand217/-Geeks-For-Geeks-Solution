@@ -27,32 +27,27 @@ const int mxx = 100001;
 const int inf = 0x3f3f3f3f;
 
 /******************* Problem Code *****************/
+
 int main() {
     int t;
     cin>>t;
 
-    double t1,t2;
     int N,C,D,S;
     int tmp,k;
     double ans;
 
     while(t--) {
         cin>>N;
-        long long sum = 0;
+        int sum = 0;
+
         for(int i = 0; i < N; i++) {
             cin>>tmp;
-            if(i == 0)
-                k = tmp;
-            sum += tmp;
+            sum = max(sum,tmp);
         }
 
         cin>>C>>D>>S;
 
-        t1 = (double)(1.0*sum + ((1.0*(N-1)*D)/S*1.0));
-        t2 = (double)(1.0*t1 + 1.0*(C-1)*k);
-        ans = (double)(1.0*(t2 - t1));
-
-        printf("%.9f\n", ans);
+        cout<<(long long)sum*(long long)(C-1)<<".000000000"<<endl;
     }
 
     return 0;
