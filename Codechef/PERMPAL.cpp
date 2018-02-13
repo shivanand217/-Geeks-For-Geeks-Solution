@@ -1,83 +1,87 @@
-#include<bits/stdc++.h>
-#define ff first
+#include <bits/stdc++.h>
+
+#define mp make_pair
+#define ll long long
+#define pb push_back
+
 #define ss second
+#define ff first
+#define si(x) scanf("%d",&x)
+#define slli(x) scanf("%lld",&x)
+#define pi(x) printf("%d",x)
+
+#define mx5 100005
+#define mx6 1000006
+#define mod 1000000007
+
+#define rep(i,n) for(int i=0; i<n; i++)
+#define fast std::ios::sync_with_stdio(false)
+#define gc() getchar()
+#define pc(x) putchar(x)
 using namespace std;
 
-int h[26];
+typedef pair<int,int> pii;
+
+const int mxx = 100001;
+// special value of infinity to take for getting rid of overflows
+const int inf = 0x3f3f3f3f;
+
+/******************* Problem Code *****************/
+
+int freq[26];
 int ans[100005];
 
-bool compare( pair<char,int> p, pair<char,int> q ) {
-    return (p.ff < q.ff);
-}
 int main() {
     int t;
     cin>>t;
     string s;
-    vector<pair<char,int> > v;
+    vector<int> adj[26];
 
     while( t-- ) {
-        v.clear();
-        memset(h, 0, sizeof(h));
+        memset(freq, 0, sizeof(freq));
         cin>>s;
+        for(int i=0; i<26; i++) {
+            adj[i].clear();
+        }
 
-        int k,j;
-        k = (s.length()%2);
         for(int i=0; i < s.length(); i++) {
-            h[s[i]-'a']++;
-            v.push_back(make_pair(s[i],i+1));
+            freq[s[i]-'a']++;
+            adj[s[i]-'a'].push_back(i+1);
         }
         int one = 0;
         for(int i = 0; i < 26; i++) {
-            if(h[i]%2 == 1) {
+            if(freq[i]%2 == 1) {
                 one++;
             }
         }
 
-        if(one > k) {
+        if(one > 1 ) {
             cout<<"-1"<<endl;
+            continue;
         } else {
-
-            int l = 0;
-            sort(v.begin(),v.end(),compare);
             int len = s.length();
 
             int mid = -1;
             if(one == 1) {
-                mid = ((len/2) + 1);
+                mid = ((len+1)/2);
             }
+            int i = 0, p , q, j;
+            int lo = 1, hi = len;
 
-            int i = 0,p,q;
-            int lo = 1,hi = len;
-
-            while(i < len) {
-
-                if(i == len-1) {
-                    p = v[i].ss;
-                    ans[p] = mid;
-                    break;
+            for(i=0; i < 26; i++){
+                for(j=0; j < freq[i]/2; j++) {
+                    ans[lo++] = adj[i][2*j];
+                    ans[hi--] = adj[i][2*j+1];
                 }
-                if( v[i].ff == v[i+1].ff ) {
-                    p = v[i].ss;
-                    q = v[i+1].ss;
-                    ans[p] = lo;
-                    ans[q] = hi;
-                    lo++; hi--;
-                    i += 2;
-                    continue;
-                }
-                if( v[i].ff != v[i+1].ff ) {
-                    p = v[i].ss;
-                    ans[p] = mid;
-                    i++;
+                if(freq[i]%2 == 1) {
+                    ans[mid] = adj[i][adj[i].size()-1];
                 }
             }
 
-            for(int i=1; i<=len; i++) {
+            for(i=1; i <= len; i++) {
                 cout<<ans[i]<<" ";
-            } cout<<endl;
-
+            }   cout<<endl;
         }
-
     }
 
     return 0;
