@@ -27,7 +27,6 @@ const int mxx = 100001;
 const int inf = 0x3f3f3f3f;
 
 /******************* Problem Code *****************/
-
 int freq[26];
 int ans[100005];
 
