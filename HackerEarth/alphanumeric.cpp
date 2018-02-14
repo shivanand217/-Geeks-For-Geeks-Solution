@@ -23,19 +23,24 @@ using namespace std;
 
 typedef pair<int,int> pii;
 
-const int mxx = 100001;
+//const int mxx = 100001;
 // special value of infinity to take for getting rid of overflows
 const int inf = 0x3f3f3f3f;
 
+int arr[100000];
+
 /******************* Problem Code *****************/
+
 int main() {
-    string s;
+
+  /**  string s;
     cin>>s;
     int ans = 0;
     for(int i=0; i < s.length(); i++) {
         if(isdigit(s[i]))
             ans += s[i];
     }
-    cout<<ans<<endl;
+    cout<<ans<<endl;**/
+
     return 0;
 }
