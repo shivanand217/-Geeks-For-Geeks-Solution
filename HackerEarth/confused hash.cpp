@@ -69,9 +69,9 @@ void fib(ll F[2][2], ll n) {
 }
 
 int main() {
+
 	ll n , x;
 	furr_long(n);
-
 	ll F[2][2] = {{5,3},{1,0}};
 
 	for(int i = 0; i < n; ++i){
