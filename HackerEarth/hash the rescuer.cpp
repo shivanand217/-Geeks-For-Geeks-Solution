@@ -28,7 +28,6 @@ const int mxx = 100001;
 const int inf = 0x3f3f3f3f;
 
 /******************* Problem Code *****************/
-
 int dp[610][610];
 int arr[610][610];
 
@@ -59,13 +58,11 @@ int main() {
             if(arr[i][j] > 0) {
                     int p = i + arr[i][j];
                     int q = j + arr[i][j];
-                    if(p < n){
-                        dp[p][j] = 1;
-                        //cout<<"on"<<endl;
+                    if(p < n && arr[p][j]!=-1) {
+                        dp[p][j] += 1;
                     }
-                    if(q < m){
-                        dp[i][q] = 1;
-                        //cout<<"on"<<endl;
+                    if(q < m && arr[i][q]!=-1) {
+                        dp[i][q] += 1;
                     }
             }
         }
