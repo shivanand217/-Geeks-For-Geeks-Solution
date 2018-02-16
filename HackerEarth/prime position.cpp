@@ -28,7 +28,6 @@ const int mxx = 10000007;
 const int inf = 0x3f3f3f3f;
 
 /******************* Problem Code *****************/
-
 bool prime[10000007];
 vector<ll> a,b;
 void seive() {
@@ -49,7 +48,7 @@ void seive() {
     int pos;
     for(int i = 0; i<a.size(); i++) {
         pos=i+1;
-        if(prime[pos] == false){
+        if(prime[pos] == false) {
             b.push_back(a[i]);
         }
     }
