@@ -43,20 +43,21 @@ int main() {
         for(int i = len; i >= 0; i--) {
             if( (s[i]=='a') || (s[i]=='e') || (s[i]=='i') || (s[i]=='o') || (s[i]=='u') ) {
                 if(i!=len) {
-                    vow[i]=vow[i+1]+1;
-                    con[i]=con[i+1];
+                    vow[i] = vow[i+1]+1;
+                    con[i] = con[i+1];
                 } else {
-                    vow[i]=1;
+                    vow[i] = 1;
                 }
             } else {
                 if(i != len) {
-                    con[i]=con[i+1]+1;
-                    vow[i]=vow[i+1];
-                }else{
+                    con[i] = con[i+1]+1;
+                    vow[i] = vow[i+1];
+                } else {
                     con[i]=1;
                 }
             }
         }
+
         ll ans = 0;
         for( int i=0; i <= len; i++ ) {
             if( (s[i] == 'a') || (s[i] == 'e') || (s[i] == 'i') || (s[i] == 'o') || (s[i] == 'u') ) {

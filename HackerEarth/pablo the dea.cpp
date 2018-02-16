@@ -28,8 +28,10 @@ const int mxx = 100001;
 const int inf = 0x3f3f3f3f;
 
 /******************* Problem Code *****************/
+
 ll s(ll n) {
     ll sum = 0LL;
+
     while(n) {
         sum += ( n%10 );
         n /= 10;
@@ -40,9 +42,7 @@ ll s(ll n) {
 ll solve( ll n, ll m ) {
     ll lo = 1;
     ll hi = n;
-    ll mid;
-    ll sum;
-    ll temp = -1;
+    ll mid,sum,temp = -1;
     while( lo <= hi ) {
         mid = ( lo + (hi - lo)/2 );
         sum = s(mid);
@@ -61,6 +61,7 @@ ll solve( ll n, ll m ) {
 }
 
 int main() {
+
     fast;
     int t;
     cin>>t;
