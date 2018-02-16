@@ -77,7 +77,6 @@ int main() {
         }
 
         s = "";
-
         sort(v.begin(), v.end(), compare);
         for(int i = 0; i < v.size(); i++) {
             s += v[i];
