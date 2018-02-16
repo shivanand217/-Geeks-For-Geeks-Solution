@@ -22,20 +22,20 @@
 using namespace std;
 
 typedef pair<int,int> pii;
-
 // special value of infinity to take for getting rid of overflows
 const int inf = 0x3f3f3f3f;
 
 /******************* Problem Code *****************/
+
 ll prime[2000005];
 
 void seive() {
-    for(ll i = 0; i < 2000005; i++)
+    for( ll i = 0; i < 2000000; i++ )
         prime[i] = 0;
     prime[0] = prime[1] = 1;
-    for(ll i = 2; i*i < 2000005; i++) {
-        if(prime[i] == 0) {
-            for(ll j = 2*i; j < 2000005; j += i) {
+    for( ll i = 2; i*i < 2000000; i++ ) {
+        if( prime[i] == 0 ) {
+            for( ll j = 2*i; j < 2000000; j += i ) {
                 prime[j] = 1;
             }
         }
@@ -49,45 +49,49 @@ bool compare( string x, string y ) {
 int main() {
     fast;
     seive();
-    int t, n;
+    ll t, n;
     ll tmp;
     cin>>t;
     vector<string> v;
     string s,ans;
-    int p;
+    ll p;
 
     while(t--) {
         v.clear();
         ans = "";
         cin>>n;
-        for( int i = 0; i < n; i++ ) {
+
+        for( ll i = 0; i < n; i++ ) {
             cin>>tmp;
             if( tmp == 0 ) {
-                v.push_back(0);
+                v.push_back(to_string(tmp));
             } else if( prime[tmp] == 1 ) {
-                s = "";
-                while(tmp) {
-                    p = tmp%10;
-                    tmp /= 10;
-                    s += (char)(p + '0');
-                }
-                reverse(s.begin(), s.end());
+                s = to_string(tmp);
                 v.push_back(s);
             }
         }
-        if(v.size() == 0) {
+
+        if( v.size() == 0 ) {
             cout<<"No Secret Code!"<<endl;
             continue;
         }
-        if(v[0].length() == 1 && v[0][0] == '1') {
-            cout<<"No Secret Code!"<<endl;
-            continue;
-        }
+
+        s = "";
+
         sort(v.begin(), v.end(), compare);
-        for(int i=0; i < v.size(); i++) {
-            ans += v[i];
+        for(int i = 0; i < v.size(); i++) {
+            s += v[i];
+
+        int fl = 0;
+        for( int i = 0; i < s.length(); i++ ) {
+            if( s[i] != '0' ) {
+                fl=1;break;
+            }
         }
-        cout<<ans<<endl;
+        if( fl == 1 )
+            cout<<s<<endl;
+        else
+            cout<<0<<endl;
     }
 
     return 0;

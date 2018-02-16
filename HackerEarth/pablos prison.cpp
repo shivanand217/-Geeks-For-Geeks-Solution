@@ -35,12 +35,11 @@ int main() {
     int t;
     cin>>t;
     string s;
-
     while(t--) {
         memset(vow,0,sizeof(vow));
         memset(con,0,sizeof(con));
         cin>>s;
-        int len = s.length()-1;
+        int len = s.length() - 1;
         for(int i = len; i >= 0; i--) {
             if( (s[i]=='a') || (s[i]=='e') || (s[i]=='i') || (s[i]=='o') || (s[i]=='u') ) {
                 if(i!=len) {
