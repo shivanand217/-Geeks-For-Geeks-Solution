@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 
 public class pablos_sentences {
     public static void main(String args[]) throws IOException {
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String str = br.readLine();
         int t = Integer.parseInt(str);
@@ -38,7 +39,6 @@ public class pablos_sentences {
                     }
                 }
             }
-
             long ans = 0;
             for( int i=0; i <= len; i++ ) {
                 if(s.charAt(i)=='a'||s.charAt(i)=='e'||s.charAt(i)=='i'||s.charAt(i)=='o'||s.charAt(i)=='u'){
