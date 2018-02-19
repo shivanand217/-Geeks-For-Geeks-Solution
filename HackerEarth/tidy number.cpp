@@ -28,6 +28,7 @@ const int mxx = 100001;
 const int inf = 0x3f3f3f3f;
 
 /******************* Problem Code *****************/
+
 bool check(ll num) {
     string s = "";
     while(num) {
