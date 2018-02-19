@@ -25,17 +25,12 @@ public class triangle_formation {
         f3 = f3.multiply(BigInteger.valueOf(c));
         f3 = f3.multiply(BigInteger.valueOf(c));
 
-        //System.out.println(f1 + " " + f2 + " " + f3);
+        // System.out.println(f1 + " " + f2 + " " + f3);
 
-        if( (f1.add(f2)).equals(f3) || (f1.add(f3)).equals(f2) || (f2.add(f3)).equals(f1)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (f1.add(f2)).equals(f3) || (f1.add(f3)).equals(f2) || (f2.add(f3)).equals(f1);
     }
 
     public static void main(String args[]) throws IOException {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String str = br.readLine();
         int t = Integer.parseInt(str);
@@ -60,5 +55,4 @@ public class triangle_formation {
             }
         }
     }
-
 }
