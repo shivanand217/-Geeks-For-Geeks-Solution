@@ -34,6 +34,7 @@ bool vis[100005];
 ll a[100005];
 
 int solve(int x, ll k) {
+
     queue<pair<ll,pair<int,int> > > q;
     memset(vis, false, sizeof(vis));
     vis[x] = true;
@@ -58,6 +59,7 @@ int solve(int x, ll k) {
             }
         }
     }
+
     return ans;
 }
 
