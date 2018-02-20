@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class tidy_number {
-
     public static boolean check( int num ) {
         String s = "";
         int p;
