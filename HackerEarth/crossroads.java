@@ -74,6 +74,6 @@ public class crossroads {
         } else {
             System.out.println("True");
         }
-        
+
     }
 }
