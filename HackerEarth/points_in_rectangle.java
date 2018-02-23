@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 public class points_in_rectangle {
 
     public static void main(String args[]) throws IOException {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String s = br.readLine();
         int t = Integer.parseInt(s);
