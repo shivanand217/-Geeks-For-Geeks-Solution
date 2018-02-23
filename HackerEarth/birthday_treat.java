@@ -3,6 +3,7 @@ import java.util.*;
 import java.math.BigInteger;
 
 class birthday_treat {
+    
     static InputReader in = new InputReader(System.in);
     static PrintWriter out = new PrintWriter(System.out);
 
@@ -40,7 +41,8 @@ class birthday_treat {
         out.flush();
         out.close();
     }
-
+    
+    /** Ignore from here its just a template for fast I/O and other stuffs **/
     static class InputReader {
 
         private InputStream stream;
