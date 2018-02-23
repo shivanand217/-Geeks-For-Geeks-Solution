@@ -42,7 +42,7 @@ class birthday_treat {
         out.close();
     }
     
-    /** Igoore from here its just a template for fast I/O and other stuffs **/
+    /** Ignore from here its just a template for fast I/O and other stuffs **/
     static class InputReader {
 
         private InputStream stream;
