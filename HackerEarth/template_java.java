@@ -3,7 +3,6 @@ import java.util.*;
 import java.math.BigInteger;
 
 public class template_java {
-
     static InputReader in = new InputReader(System.in);
     static PrintWriter out = new PrintWriter(System.out);
 
