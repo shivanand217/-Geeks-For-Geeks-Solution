@@ -9,7 +9,7 @@ int u,v,q,n,x,i,ans1;
 void dfs(int node,int cnt,int par,long long sum1,long long k) {
     sum1 += val[node];
     cnt++;
-    if( sum1 >= k ){
+    if( sum1 >= k ) {
         ans1 = min(ans1,cnt);
     }
     for(int i=0; i<gr[node].size(); i++) {
