@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class minimum_nodes_with_fastio {
-    
+
     static InputReader in = new InputReader(System.in);
     static PrintWriter out = new PrintWriter(System.out);
     static int max_node = 100005;
