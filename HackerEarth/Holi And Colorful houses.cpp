@@ -7,8 +7,8 @@ int m,n;
 int N,Q,t,len;
 
 int main() {
-    scanf("%d",&t);
-    int cost1, cost2;
+    cin>>t;
+    int cost1,cost2;
 
     while(t--) {
         cin>>N>>Q;
