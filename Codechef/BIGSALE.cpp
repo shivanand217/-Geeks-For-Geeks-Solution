@@ -12,9 +12,9 @@ int main() {
     while(t--) {
         loss = 0.0;
         cin>>n;
-        for(int i=0; i<n; i++) {
+        for(int i=0; i < n; i++) {
             cin>>price[i]>>qty[i]>>disc[i];
-            temp = price[i]; //original price
+            temp = price[i];
             increase = (price[i] * (disc[i]/100*1.0));
             price[i] = price[i] + increase;
             discount = (1.0*price[i] * (disc[i]*1.0/100*1.0));
