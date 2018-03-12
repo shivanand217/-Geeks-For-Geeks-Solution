@@ -2,7 +2,6 @@
 using namespace std;
 #define mxx 100005
 long long ar[mxx];
-
 int main() {
     int t,n;
     scanf("%d",&t);
