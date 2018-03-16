@@ -138,6 +138,7 @@ int main() {
                 break;
         }
         int len=v.size()-1;
+        if()
         for(auto it: v)
             cout<<it;
         cout<<endl;
