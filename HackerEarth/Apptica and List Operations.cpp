@@ -3,7 +3,6 @@ using namespace std;
 #define mod 1000000007
 typedef long long ll;
 
-// to calculate mod inverse
 ll modexp(ll x, ll y)
 {
     if (y == 0)
