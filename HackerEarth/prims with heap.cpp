@@ -75,7 +75,6 @@ void PriorityQueue :: insertKey(pii k) {
         printf("Heap capacity full.\n");
         return;
     }
-
     heap_size++;
     int i = heap_size - 1;
     harr[i] = k;
@@ -126,7 +125,11 @@ long long prim(int x, int nodes) {
     /** priority queue for selecting the lowest cost edges each time **/
     /** In this case it is Min-Heap **/
 
-    // priority_queue<pii, vector<pii>, greater<pii> > Q;
+    /** we can also take our priority queue from STL standard library
+
+        priority_queue<pii, vector<pii>, greater<pii> > Q;
+    **/
+
     memset(marked, false, sizeof(marked));
 
     PriorityQueue Q(nodes);
@@ -170,11 +173,11 @@ long long prim(int x, int nodes) {
             }
         }
     }
+
     return minimumCost;
 }
 
 int main() {
-
     /** Taking graph nodes to start with 1 **/
     int nodes, edges, x, y;
     long long weight, minimumCost;
