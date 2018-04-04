@@ -1,5 +1,4 @@
-/** Program to generate test case for a weighted undirected graph(Dense) **/
-
+/** Program to generate test case for a weighted undirected graph (Dense graph) **/
 #include<bits/stdc++.h>
 #include<unistd.h>
 
@@ -18,7 +17,6 @@ using namespace std;
 int main() {
     set<pair<int,int> > container;
     set<pair<int,int> > :: iterator it;
-
     /**
     if( access("Test_cases_undirected_weighted_graph.in", F_OK) != -1 ) {
         file_name = default_;
@@ -39,8 +37,7 @@ int main() {
         }
     }
     **/
-
-    freopen("Test_cases_undirected_weighted_graph5.in", "w", stdout);
+    freopen("Test_cases_undirected_weighted_graph6.in", "w", stdout);
 
     /** set initial seed to NULL **/
     srand( time(NULL) );
@@ -61,6 +58,7 @@ int main() {
         }
 
         printf("Vertices: %d, Edges: %d\n", NUM, NUMEDGE);
+        vector<pair<int,int> > graph[NUM];
 
         /** printing edges of the form (a, b) **/
         for(int j=1; j <= NUMEDGE; j++) {
@@ -76,19 +74,22 @@ int main() {
                 remain searching for the new pair otherwise
                 add this pair in the graph.
             **/
-            while(container.find(p) != container.end() ||
-                  container.find(reverse_p) != container.end()) {
-
+            while( container.find(p) != container.end() ||
+                   container.find(reverse_p) != container.end() ) {
                 a = rand() % NUM;
                 b = rand() % NUM;
                 p = make_pair(a,b);
                 reverse_p = make_pair(b,a);
             }
-            container.insert(p);
+                container.insert(p);
         }
 
         for(it = container.begin(); it != container.end(); ++it) {
             int weight = 1 + rand() % MAX_WEIGHT;
+
+            graph[it->first].push_back(make_pair(it->second,weight));
+            graph[it->second].push_back(make_pair(it->first,weight));
+
             printf("%d %d %d\n", it->first, it->second, weight);
         }
 
