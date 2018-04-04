@@ -8,7 +8,7 @@ using namespace std;
 
 #define MAX_VERTICES 1000
 
-/** for maximum undirected weighted dense graph edges will be (n*(n-1))/2 **/
+/** maximum edges for undirected weighted dense graph will be (n*(n-1))/2 **/
 #define MAX_EDGES 1000000
 
 /** maximum edge weight **/
