@@ -7,7 +7,7 @@ using namespace std;
 
 #define MAX_VERTICES 1000
 
-/** maximum edges for undirected unweighted dense graph will be (n*(n-1))/2 **/
+/** maximum edges for directed weighted dense graph will be (n*(n-1))/2 **/
 #define MAX_EDGES 1000000
 
 #define MAXWEIGHT 100000
@@ -16,7 +16,7 @@ int main() {
     set<pair<int,int> > container;
     set<pair<int,int> > :: iterator it;
 
-    freopen("Test_cases_undirected_unweighted_graph4.in", "w", stdout);
+    freopen("Test_cases_directed_weighted_graph5.in", "w", stdout);
 
     /** set initial seed to NULL **/
     srand( time(NULL) );

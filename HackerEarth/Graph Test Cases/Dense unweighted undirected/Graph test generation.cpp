@@ -1,4 +1,5 @@
 /** Program to generate test case for a unweighted undirected graph (Dense graph) **/
+
 #include<bits/stdc++.h>
 #include<unistd.h>
 using namespace std;
@@ -11,7 +12,6 @@ using namespace std;
 #define MAX_EDGES 1000000
 
 int main() {
-
     set<pair<int,int> > container;
     set<pair<int,int> > :: iterator it;
 
