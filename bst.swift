@@ -15,7 +15,6 @@ class Node {
 
 class BST {
     var root : Node?
-    
     public func insert(rootNode : Node? , data : Int) -> Node {
         guard let root = rootNode else {  return Node(data: data) }
         
@@ -43,4 +42,5 @@ let arr = [10,20,5,30]
 for item in arr {
     bst.root = bst.insert(rootNode: bst.root, data: item)
 }
+
 bst.inorder(rootNode: bst.root)
