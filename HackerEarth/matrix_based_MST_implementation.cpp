@@ -5,6 +5,7 @@
 /** Algorithm has been Taken from a Paper Published Under, 
     International Journal of Scientific and Research Publications as Volume 4, Issue 9 on September 2014. ISSN 2250-3153
     Minimum Cost Spanning Tree using Matrix Algorithm By Dr.D vijayalakshmir, R.kalaivani
+    Link to the Paper:  http://www.ijsrp.org/research-paper-0914/ijsrp-p3319.pdf
 **/
 
 #include <iostream>
@@ -16,7 +17,7 @@
 
 using namespace std;
 /** 
-   We have to to restrict our nodes constaints because of
+   We have to restrict our nodes constaints because of
    the memory consumption in the representation of the graph
    as in this algorithm the graph is represented using adjacency list 
 **/
