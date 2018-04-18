@@ -11,9 +11,9 @@
 using namespace std;
 
 /**
-   We have to restrict our nodes constaints because of
-   the memory consumption in the representation of the graph
-   as in this algorithm the graph is represented using adjacency list
+   We have to restrict our vertex constraints because of
+   the memory consumption in the representation of the graph with adjacency matrix.
+   as in this algorithm the graph is represented using adjacency matrix.
 **/
 
 #define maxx 1004
@@ -113,8 +113,8 @@ pair<long long,pair<int,int> > find_next_minimum() {
 int main() {
     int x , y, wt;
 
-    freopen("input6.in", "r", stdin);
-    freopen("output6.out", "w", stdout);
+    freopen("input7.in", "r", stdin);
+    freopen("output7.out", "w", stdout);
 
     /** input total nodes **/
     scanf("%d", &nodes);
@@ -138,7 +138,6 @@ int main() {
     int total_marked = 0;
     MST_weight = 0LL;
     int ff,ss;
-
 
     /** processing all the edges of the graph **/
     while(1) {
