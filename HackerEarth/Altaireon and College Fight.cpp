@@ -24,7 +24,7 @@ int main() {
         } else {
             cout<<(b.end() - p)<<" ";
         }
-    }   cout<<endl;
+    }  cout<<endl;
 
     return 0;
 }
