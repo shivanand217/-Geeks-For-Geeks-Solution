@@ -139,6 +139,7 @@ int main() {
     MST_weight = 0LL;
     int ff,ss;
 
+
     /** processing all the edges of the graph **/
     while(1) {
         p = find_next_minimum();
