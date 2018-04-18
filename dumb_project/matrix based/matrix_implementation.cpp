@@ -11,7 +11,7 @@
 using namespace std;
 
 /**
-   We have to to restrict our nodes constaints because of
+   We have to restrict our nodes constaints because of
    the memory consumption in the representation of the graph
    as in this algorithm the graph is represented using adjacency list
 **/
