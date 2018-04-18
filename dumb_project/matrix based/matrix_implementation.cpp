@@ -100,7 +100,7 @@ pair<long long,pair<int,int> > find_next_minimum() {
         }
     }
 
-    /** if we runs out of edges **/
+    /** if we run out of edges **/
     if( weigh == LLONG_MAX ) {
         p = make_pair(0LL, make_pair(0,0));
         return p;
@@ -113,8 +113,8 @@ pair<long long,pair<int,int> > find_next_minimum() {
 int main() {
     int x , y, wt;
 
-    freopen("base_test_input.in", "r", stdin);
-    freopen("base_test_output.out", "w", stdout);
+    freopen("input1.in", "r", stdin);
+    freopen("output1.out", "w", stdout);
 
     /** input total nodes **/
     scanf("%d", &nodes);
