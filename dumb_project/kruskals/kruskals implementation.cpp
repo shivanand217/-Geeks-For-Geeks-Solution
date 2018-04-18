@@ -166,7 +166,6 @@ int main() {
     }
 
     minimumCost = kruskal(EDGE);
-
     printf("Total Cost of our minimum spanning tree is %lld\n", minimumCost);
 
     return 0;

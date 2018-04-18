@@ -113,8 +113,8 @@ pair<long long,pair<int,int> > find_next_minimum() {
 int main() {
     int x , y, wt;
 
-    freopen("input7.in", "r", stdin);
-    freopen("output7.out", "w", stdout);
+    freopen("input10.in", "r", stdin);
+    freopen("output10.out", "w", stdout);
 
     /** input total nodes **/
     scanf("%d", &nodes);
