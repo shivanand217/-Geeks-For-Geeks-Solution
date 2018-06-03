@@ -10,8 +10,9 @@ int main() {
     cin>>s;
     int ans=0;
     int i=0,cnt=0;
-    while(i < s.length()) {
-        if(i == s.length()-1 || i == s.length()-2){
+    int len = s.length();
+    while( i < len ) {
+        if(i == len-1 || i == len-2){
             break;
         }
         if(s[i]=='x' && s[i+1]=='x' && s[i+2]=='x'){
@@ -19,6 +20,9 @@ int main() {
             while(s[i] == 'x') {
                 cnt++;
                 i++;
+                if(i == len){
+                    break;
+                }
             }
             ans+=(cnt-2);
             cnt = 0;
