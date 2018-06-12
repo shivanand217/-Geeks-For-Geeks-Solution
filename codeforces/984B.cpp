@@ -1,7 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-const int mxn = 206;
+const int mxn = 306;
+
 #define fast std::ios::sync_with_stdio(false)
 int n,m;
 bool ans;
