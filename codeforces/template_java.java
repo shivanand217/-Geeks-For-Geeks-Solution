@@ -27,7 +27,8 @@ public class template_java {
     /** ignore from here its just some Fast I/O
      *  and other useful Stuff's
      */
-    static class InputReader{
+    static class InputReader {
+
         private InputStream stream;
         private byte[] buf = new byte[1024];
         private int curChar;
