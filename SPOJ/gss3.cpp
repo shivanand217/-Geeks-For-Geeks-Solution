@@ -1,136 +1,159 @@
-#include <bits/stdc++.h>
-
+#include<bits/stdc++.h>
+#define ff first
+#define ss second
 #define mp make_pair
 #define ll long long
+#define max3(a,b,c) max(a, max(b,c))
+#define max4(a,b,c,d) max(a, max(b, max(c,d)))
 #define pb push_back
-
-#define ss second
-#define ff first
 #define si(x) scanf("%d",&x)
 #define slli(x) scanf("%lld",&x)
 #define pi(x) printf("%d",x)
-
-#define mx5 100005
-#define mx6 1000006
-#define mod 1000000007
-
-#define rep(i,n) for(int i=0; i<n; i++)
-#define fast std::ios::sync_with_stdio(false)
-#define gc() getchar()
-#define pc(x) putchar(x)
-
+#define sp() putchar(' ')
+#define nl() putchar('\n')
+#define fck std::ios::sync_with_stdio(false);
+#define mx5 100010
+#define mx6 1000010
+#define MOD 1000000007
 using namespace std;
 
-typedef pair<int,int> pii;
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/detail/standard_policies.hpp>
+#define ordered_set tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>
+using namespace __gnu_pbds;
 
-const int mxx = 100001;
-// special value of infinity to take for getting rid of overflows
-const int inf = 0x3f3f3f3f;
+struct SegmentTreeNode {
+    int prefixMaxSum, suffixMaxSum, maxSum, sum;
 
-/******************* Problem Code *****************/
+    void assignLeaf(int value) {
+        prefixMaxSum = suffixMaxSum = maxSum = sum = value;
+    }
 
-struct tree {
-    int prefixMaxSum, maxSum, suffixMaxSum, sum;
+    void merge_(SegmentTreeNode& left, SegmentTreeNode& right) {
+        sum = left.sum + right.sum;
+        prefixMaxSum=max(left.prefixMaxSum, left.sum+right.prefixMaxSum);
+        suffixMaxSum=max(right.suffixMaxSum, right.sum+left.suffixMaxSum);
+        maxSum=max(prefixMaxSum, max(suffixMaxSum, max(left.maxSum,max(right.maxSum,left.suffixMaxSum+right.prefixMaxSum))));
+    }
+
+    int getValue() {
+        return maxSum;
+    }
 };
 
-int arr[ mxx ];
-struct tree segtree[ 4 * mxx ];
-int n ,q, x, y, type;
+template<class T, class V>
+class SegmentTree {
+    SegmentTreeNode* nodes;
+    int N;
 
-void build( int node, int s, int e ) {
-    if ( s == e ) {
-        segtree[ node ].prefixMaxSum = segtree[ node ].suffixMaxSum = segtree[ node ].maxSum = segtree[ node ].sum = arr[ s ];
-        return;
+public:
+
+    SegmentTree(T arr[], int N){
+        this->N = N;
+        nodes = new SegmentTreeNode[getSegmentTreeMemory(N)];
+        buildTree(arr, 1, 0, N-1);
     }
 
-    int mid = ( s + e )/2;
-    int left = 2 * node;
-    int right = 2 * node + 1;
-
-    build ( left, s, mid );
-    build ( right, mid + 1, e );
-
-    segtree[ node ].sum = segtree[ left ].sum + segtree[ right ].sum;
-    segtree[ node ].prefixMaxSum = max( segtree[ left ].prefixMaxSum , segtree[ left ].sum + segtree[ right ].prefixMaxSum );
-    segtree[ node ].suffixMaxSum = max( segtree[ right ].suffixMaxSum, segtree[ right ].sum + segtree[ left ].suffixMaxSum );
-    segtree[ node ].maxSum = max( segtree[ node ].prefixMaxSum , max( segtree[ node ].suffixMaxSum, max( segtree[left].maxSum , max( segtree[right].maxSum , segtree[ left ].suffixMaxSum + segtree[ right ].prefixMaxSum ))));
-}
-
-struct tree query( int node, int s, int e, int lo, int hi ) {
-    if( s == lo && e == hi ) {
-        return segtree[ node ];
+    ~SegmentTree() {
+        delete[] nodes;
     }
 
-    int mid = ( s + e )/2;
-
-    if( hi <= mid ) {
-        return query( 2 * node , s, mid, lo, hi );
+    int getValue(int lo, int hi){
+        SegmentTreeNode result = getValue(1, 0, N-1, lo, hi);
+        return result.getValue();
     }
 
-    if( lo > mid ) {
-        return query( 2 * node + 1, mid + 1, e, lo, hi );
+    // point update
+	void update(int index, T value){
+        update(1, 0, N-1, index, value);
     }
 
-    struct tree left;
-    struct tree right;
-    struct tree result;
+private:
+    void buildTree(T arr[], int stIndex, int lo, int hi){
+        if(lo == hi){
+            nodes[stIndex].assignLeaf(arr[lo]);
+            return;
+        }
 
-    left = query( 2*node, s, mid, lo , mid );
-    right = query( 2*node + 1, mid + 1, e, mid + 1, hi );
+        int left = 2*stIndex;
+        int right = left+1;
+        int mid = (lo+hi)/2;
 
-    result.sum = left.sum + right.sum;
-    result.prefixMaxSum = max( left.prefixMaxSum , left.sum + right.prefixMaxSum );
-    result.suffixMaxSum = max( right.suffixMaxSum, right.sum + left.suffixMaxSum );
-    result.maxSum = max( result.prefixMaxSum , max( result.suffixMaxSum, max( left.maxSum , max( right.maxSum , left.suffixMaxSum + right.prefixMaxSum ))));
-
-    return result;
-}
-
-void update(int node, int s, int e, int index, int value) {
-    if ( s == e ) {
-        arr[ index ] = value;
-        segtree[node].sum = segtree[node].prefixMaxSum = segtree[node].suffixMaxSum = segtree[node].maxSum = arr[ index ];
-        return;
+        buildTree(arr, left, lo, mid);
+        buildTree(arr, right, mid+1, hi);
+        nodes[stIndex].merge_(nodes[left], nodes[right]);
     }
 
-    int mid = ( s + e )/2;
-    int left = 2 * node;
-    int right = 2 * node + 1;
+    SegmentTreeNode getValue(int stIndex, int left, int right, int lo, int hi){
+        if(left == lo && right == hi){
+            return nodes[stIndex];
+        }
 
-    if( index <= mid ) {
-        update( left, s, mid, index, value );
-    }
-    if( index > mid ) {
-        update( right, mid+1, e, index, value );
+        int mid = (left + right)/2;
+
+        if(lo > mid)
+            return getValue(2*stIndex+1, mid+1, right, lo, hi);
+
+        if(hi <= mid)
+			return getValue(2*stIndex, left, mid, lo, hi);
+
+        SegmentTreeNode leftResult = getValue(2*stIndex, left, mid, lo, mid);
+        SegmentTreeNode rightResult = getValue(2*stIndex+1, mid+1, right, mid+1, hi);
+        SegmentTreeNode result;
+        result.merge_(leftResult, rightResult);
+
+        return result;
     }
 
-    segtree[ node ].sum = segtree[ left ].sum + segtree[ right ].sum;
-    segtree[ node ].prefixMaxSum = max( segtree[ left ].prefixMaxSum , segtree[ left ].sum + segtree[ right ].prefixMaxSum );
-    segtree[ node ].suffixMaxSum = max( segtree[ right ].suffixMaxSum, segtree[ right ].sum + segtree[ left ].suffixMaxSum );
-    segtree[ node ].maxSum = max( segtree[ node ].prefixMaxSum , max( segtree[ node ].suffixMaxSum, max( segtree[left].maxSum , max( segtree[right].maxSum , segtree[ left ].suffixMaxSum + segtree[ right ].prefixMaxSum ))));
-}
+    int getSegmentTreeMemory(int N){
+        int size_=1;
+        for(; size_ < N; size_<<=1);
+        return (size_<<1);
+    }
+
+	// point update
+    void update(int stIndex, int lo, int hi, int index, int value){
+        if(lo == hi){
+            nodes[stIndex].assignLeaf(value);
+            return;
+        }
+
+        int left = 2*stIndex;
+        int right = left + 1;
+        int mid=(lo+hi)/2;
+
+        if(index <= mid){
+            update(left, lo, mid, index, value);
+        } else if(index > mid) {
+			update(right, mid+1, hi, index, value);
+        }
+
+        nodes[stIndex].merge_(nodes[left], nodes[right]);
+    }
+};
 
 int main() {
-    scanf( "%d" , &n );
-    for(int i = 0 ; i < n ; i++ ) {
-        scanf( "%d", &arr[ i ] );
+    int n, i, A[50002], m, x, y, type;
+    scanf("%d", &n);
+    for(i=0; i < n; i++){
+        scanf("%d", &A[i]);
     }
 
-    build( 1 , 0 , n - 1 );
-    scanf( "%d", &q );
-    struct tree res;
+    SegmentTree<int,int> st(A, n);
+    scanf("%d",&m);
 
-    while( q-- ) {
-        scanf( "%d %d %d", &type, &x, &y );
-        if( type == 1 ) {
-            --x, --y;
-            res = query(1, 0, n-1, x, y);
-            printf("%d\n", res.maxSum);
-        } else {
-            --x;
-            update( 1, 0, n-1, x, y);
+    for(i=0; i<m; ++i) {
+        scanf("%d %d %d", &type, &x, &y);
+        if(type==0){
+            x--;
+            st.update(x, y);
         }
+        if(type==1) {
+			x--;
+			y--;
+			printf("%d\n", st.getValue(x,y));
+		}
     }
-
     return 0;
 }
