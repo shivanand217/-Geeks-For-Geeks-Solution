@@ -12,7 +12,7 @@ int main(){
     long long sum=0;
     memset(c,0,sizeof(c));
     vector<int> ans;
-
+    
     for(int i=0; i<n; i++){
         cin>>a[i];
         c[a[i]]+=1;
