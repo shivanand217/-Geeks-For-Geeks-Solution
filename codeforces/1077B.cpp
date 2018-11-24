@@ -8,11 +8,10 @@ int arr[maxx];
 int main(){
     int n;
     cin>>n;
-
+    
     for(int i=0; i<n;i++){
         cin>>arr[i];
     }
-
     int j=1;
     int ans=0;
 
