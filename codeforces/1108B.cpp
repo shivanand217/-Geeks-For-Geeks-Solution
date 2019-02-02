@@ -22,7 +22,11 @@ void divisor(int n) {
 int main() {
     int n,first=INT_MIN,largest=INT_MIN,temp;
     cin>>n;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> ae806847d9a5f18c09f4ebcf59375cc6abe8db71
     vector<int> vec;
     vector<int> :: iterator it;
     
@@ -34,6 +38,10 @@ int main() {
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ae806847d9a5f18c09f4ebcf59375cc6abe8db71
     for(int i=1; i<=first; i++){
         if(first % i == 0){
             it = find(vec.begin(), vec.end(), i);
