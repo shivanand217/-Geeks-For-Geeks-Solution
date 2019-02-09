@@ -3,10 +3,10 @@
 using namespace std;
 
 long long calculate(long long y, long long x){
-    cout<<x<<" "<<y<<endl;
+    //cout<<x<<" "<<y<<endl;
     if(y==0){
         return 1LL;
-    } else if (y == 1) {
+    } else if (y == 1){
         return x;
     }
 
