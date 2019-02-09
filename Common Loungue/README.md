@@ -1,3 +1,3 @@
-# Common loungue problems
+# Common lounge problems
 
 > http://commonlounge.com/
