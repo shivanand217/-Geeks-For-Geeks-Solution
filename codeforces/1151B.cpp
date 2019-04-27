@@ -1,4 +1,5 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<cstdlib>
 using namespace std;
 int n,m,a[505][505],b[505][505],c[505];
 void pr()
