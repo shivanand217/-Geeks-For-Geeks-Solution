@@ -1,6 +1,10 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
+#include<cstring>
 using namespace std;
+
 int a,j=19,k;
+
 int main(){
 	cin>>a;
 	cout<<"39\n";
@@ -11,4 +15,5 @@ int main(){
 		cout<<k<<' ';
 	}
 	cout<<log2(a)+1;
+    return 0;
 }
